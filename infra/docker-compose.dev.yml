@@ -1,0 +1,56 @@
+services:
+
+  # ── Local AWS simulation via LocalStack ──────────────────────────────────
+  localstack:
+    image: localstack/localstack:3.7
+    container_name: eka_localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,sqs,secretsmanager,opensearch
+      - DEFAULT_REGION=us-east-1
+      - DEBUG=0
+      - PERSISTENCE=1
+    volumes:
+      - localstack_data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Local PostgreSQL (mirrors Amazon RDS schema) ──────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: eka_postgres
+    environment:
+      POSTGRES_USER: eka_user
+      POSTGRES_PASSWORD: eka_pass
+      POSTGRES_DB: eka_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - eka_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eka_user -d eka_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── PGAdmin — database GUI ────────────────────────────────────────────────
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: eka_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@eka.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  eka_pgdata:
+  localstack_data:

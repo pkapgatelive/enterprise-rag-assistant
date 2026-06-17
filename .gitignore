@@ -1,50 +1,47 @@
-# macOS
-.DS_Store
-
-# Environment files
-.env
-*.env
-
 # Python
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+.venv/
 venv/
 env/
-.venv/
-docs/
-docs/implementation-plan/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
 # Node
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-pnpm-lock.yaml
+frontend/dist/
+frontend/build/
 
-# IDEs and editors
-.vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.swp
+# macOS
+.DS_Store
+*.icloud
 
 # Logs
 *.log
 logs/
-*.log.*
 
-# Build
-dist/
-build/
-*.egg-info/
+# LocalStack persistence volume
+.localstack/
 
-# Cloud storage
-*.icloud
+# CDK output
+infra/cdk/cdk.out/
 
-# Misc
-coverage/
-.python-version
+# AWS credentials
+.aws/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
