@@ -1,0 +1,42 @@
+# ── Core Framework ────────────────────────────────────────────────────────────
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-multipart==0.0.12
+
+# ── AWS / Bedrock ─────────────────────────────────────────────────────────────
+boto3==1.35.30
+botocore==1.35.30
+aiobotocore==2.15.0
+
+# ── LangChain ─────────────────────────────────────────────────────────────────
+langchain==0.3.7
+langchain-community==0.3.7
+langchain-aws==0.2.3
+
+# ── Document Processing ───────────────────────────────────────────────────────
+pypdf==5.0.1
+python-docx==1.1.2
+openpyxl==3.1.5
+python-pptx==1.0.2
+unstructured[pdf,docx,pptx,xlsx]==0.15.14
+beautifulsoup4==4.12.3
+
+# ── Vector Store — Amazon OpenSearch Serverless ───────────────────────────────
+opensearch-py==2.7.1
+requests-aws4auth==1.3.1
+
+# ── Database ──────────────────────────────────────────────────────────────────
+sqlalchemy[asyncio]==2.0.36
+asyncpg==0.30.0
+alembic==1.13.3
+
+# ── AWS X-Ray Tracing ─────────────────────────────────────────────────────────
+aws-xray-sdk==2.14.0
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+python-dotenv==1.0.1
+httpx==0.27.2
+tenacity==9.0.0
+structlog==24.4.0
